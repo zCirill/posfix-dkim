@@ -6,10 +6,10 @@ apt-get update
 apt-get install opendkim opendkim-tools -y
 echo $DOMAINNAME >> /etc/dkim.domains
 mkdir /etc/opendkim
+touch /etc/opendkim/internal
 
 opendkim-genkey --directory=/etc/opendkim/ --domain=name=$DOMAINNAME --selector=email
 
-cp email.* /etc/opendkim/
 cp conf/dkim/opendkim.conf /etc/opendkim.conf
 echo "email._domainkey.$DOMAINNAME $DOMAINNAME:email:/etc/opendkim/email.private" > /etc/opendkim/keytable
 echo "$DOMAINNAME email._domainkey.$DOMAINNAME" >> /etc/opendkim/signingtable

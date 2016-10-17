@@ -3,7 +3,7 @@
 DOMAINNAME=$1
 
 WANIP=`curl -s http://whatismijnip.nl |cut -d " " -f 5`
-PTR=`nslookup $WANIP | grep "name =" | cut -f3 -d" "`
+PTR=`nslookup $WANIP | grep "name =" | cut -f3 -d" " | rev | cut -c 2- | rev`
 
 debconf-set-selections <<< "postfix postfix/mailname string $DOMAINNAME"
 debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
