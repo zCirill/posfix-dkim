@@ -7,7 +7,7 @@ apt-get install opendkim opendkim-tools -y
 echo $DOMAINNAME >> /etc/dkim.domains
 mkdir /etc/opendkim
 
-opendkim-genkey -D . -d $DOMAINNAME -s email
+opendkim-genkey --directory=/etc/opendkim/ --domain=name=$DOMAINNAME --selector=email
 
 cp email.* /etc/opendkim/
 cp conf/dkim/opendkim.conf /etc/opendkim.conf
