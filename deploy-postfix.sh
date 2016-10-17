@@ -7,7 +7,7 @@ PTR=`nslookup $WANIP | grep "name =" | cut -f3 -d" "`
 
 debconf-set-selections <<< "postfix postfix/mailname string $DOMAINNAME"
 debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
-apt-get install postfix -y
+apt-get install postfix curl -y
 postconf -e myhostname=$PTR
 postconf -e inet_protocols=ipv4
 postconf -e relay_domains="$DOMAINNAME"
